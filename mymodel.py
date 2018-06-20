@@ -21,15 +21,19 @@ import numpy as np
 class myLinearRegressionModel :
     
     def __init__(self) :
-        self.iter = 105
-        self.alpha = 0.01
+        self.iter = 5000
+        self.alpha = 0.1
         self.hyp = 0
         self.loss = 0
-        self.theta = [10010.25,70000.65]
+        self.theta = [0.69, 1.05]
         
     def loadData(self,X_train,y_train):
-        self.X1 = X_train
         self.y = y_train
+
+        u = np.mean(X_train)
+        r = np.ptp(X_train, axis = 0)
+        self.X1= (X_train-u)/r
+        
         self.m = len(X_train)
         x0 = np.array([1]*self.m)
         x0 = x0.reshape(self.m,1)
@@ -63,8 +67,17 @@ class myLinearRegressionModel :
             print('loss : ',self.loss)
             self.gradients()
     
-    def predict(X_test) :
-        pred = np.matmul(X_test, np.array(self.theta).T)
+    def predict(self,X_test) :
+        u = np.mean(X_test)
+        r = np.ptp(X_test, axis = 0)
+        test= (X_test-u)/r
+        n = len(X_test)
+        x0 = np.array([1]*n)
+        x0 = x0.reshape(n,1)
+        test = np.concatenate((x0, test), 
+                                      axis=1) 
+        
+        pred = np.matmul( test, np.array(self.theta).T)
         return pred
         
         
