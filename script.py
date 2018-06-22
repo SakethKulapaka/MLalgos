@@ -2,7 +2,7 @@
 """
 Created on Thu Jun 21 21:44:26 2018
 
-@author: saket
+@author: saketh
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,8 +16,9 @@ y = dataset.iloc[:, 1].values
 from sklearn.cross_validation import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, random_state = 0)
 
-from mymodel import myLinearRegressionModel
-model = myLinearRegressionModel()
+from mymodel import LinearRegression
+model = LinearRegression()
 model.loadData(X_train,y_train)
 model.fit()
 y_pred = model.predict(X_test)
+print(y_pred)
