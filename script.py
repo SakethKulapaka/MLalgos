@@ -18,7 +18,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, rando
 
 from mymodel import LinearRegression
 model = LinearRegression()
+
 model.loadData(X_train,y_train)
+model.calcHyp()
+model.gradients()
 model.fit()
 y_pred = model.predict(X_test)
 print(y_pred)
