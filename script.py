@@ -4,8 +4,8 @@ Created on Thu Jun 21 21:44:26 2018
 
 @author: saketh
 """
-import numpy as np
-import matplotlib.pyplot as plt
+#import numpy as np
+#import matplotlib.pyplot as plt
 import pandas as pd
 
 dataset = pd.read_csv('Salary_Data.csv')
@@ -20,8 +20,10 @@ from mymodel import LinearRegression
 model = LinearRegression()
 
 model.loadData(X_train,y_train)
-model.calcHyp()
-model.gradients()
-model.fit()
+
+model.fit() #you can also mention no of iterations and learning rate by using
+            # model.fit(2500, 0.001)
+            #by default iterations = 5000 learening rate = 0.03
+
 y_pred = model.predict(X_test)
 print(y_pred)
