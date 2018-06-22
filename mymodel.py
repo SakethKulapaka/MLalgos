@@ -99,19 +99,26 @@ class LinearRegression :
         x0 = np.array([1]*self.m).reshape(self.m,1)
         self.X = np.concatenate((x0,X_train), axis=1)
         self.X = self.X/np.amax(self.X, axis=0)
+        print(self.X)
         
-        self.y = y_train
+        self.y = y_train.reshape(self.m,1)
+        print(np.shape(self.y))
     def calcHyp(self) :
-        self.hyp = np.matmul(self.X,self.theta.T)
-    
+        self.hyp = np.matmul(self.X,self.theta.T).reshape(self.m,1)
+        print(self.hyp)
+        
     def costfunc(self) :
         self.loss = ((self.hyp-self.y)**2)/(2*self.m)
         self.loss = np.sum(self.loss)
         
     def gradients(self) :
-        temp = np.sum(self.X*(self.hyp-self.y),axis =0)*(self.alpha/self.m)
-        temp = temp.reshape(1,self.n)
-        self.theta = self.theta - temp
+        temp = (self.hyp-self.y).reshape(self.m,1)
+        temp = np.sum(self.X*temp, axis=0)
+        self.theta -= ((temp*self.alpha)/self.m)
+        print(self.theta)
+        #temp = np.sum(self.X*temp,axis =0)*(self.alpha/self.m)
+        #temp = temp.reshape(1,self.n)
+        #self.theta = self.theta - temp
     
     def fit(self) :
         for i in range(self.iter) :
